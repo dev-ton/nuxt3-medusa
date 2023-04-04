@@ -1,15 +1,33 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 
+const client = useMedusaClient();
+const { products } = await client.products.list();
 </script>
-
 <template>
-  <div class="card">
-    <h2>Blueprint</h2>
-    <p>Use this page to start from scratch and place your custom content !</p>
-    <NuxtLink to="/">
+  <section class="flex">
+    <div v-for="product in products" class="mx-2">
+    <NuxtLink :to="`/detail/${product.id}`">
+        <div class="relative rounded-lg shadow-lg">
+          <NuxtImg
+              :src="product.thumbnail"
+              format="webp"
+              class="shadow-lg rounded-lg opacity-1 hover:opacity-95 transition duration-300 ease-in-out w-full"
+            />
+            <div class="p-6">
+              <h5 class="font-bold text-lg mb-3">{{ product.title }}</h5>
+              <pre class="text-gray-500 mb-4">{{
+                product.variants[0].prices[0].amount
+              }}</pre>
+              <p>{{ product.description }}</p>
+            </div>
+            
+          </div>
+        </NuxtLink>
+        </div>
+      </section>
+      <NuxtLink to="/">
       Home page
     </NuxtLink>
-  </div>
-</template>
+    </template>
 
 <style scoped></style>

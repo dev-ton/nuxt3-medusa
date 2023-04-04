@@ -1,7 +1,7 @@
 import pkg from './package.json'
 
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: false,
   runtimeConfig: {
     public: {
       APP_VERSION: pkg.version,
@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxt/content',
     '@vueuse/nuxt',
+    'nuxt-medusa',
+    '@nuxt/image-edge',
   ],
   content: {
     highlight: {
